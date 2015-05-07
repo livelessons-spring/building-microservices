@@ -10,5 +10,6 @@
 		<module>livelessons-parent</module>
 		<module>livelessons-bootstrap</module>
 		<module>livelessons-configuration</module>
+		<module>livelessons-cloud</module>
 	</modules>
 </project>

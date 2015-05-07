@@ -1,0 +1,38 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Amazon S3)
+
+== Introduction
+This example shows how you can use the Amazon Simple Storage Service (S3) to read and
+write blob data.
+
+== Prerequisites
+You will need an http://aws.amazon.com[Amazon AWS] account with a S3 bucket which you
+can use for testing. To configure the account you need to create a
+`application-secrets.properties` file in the `src/main/resources` folder with your
+access and secret key:
+
+```
+cloud.aws.credentials.accessKey=AKXXXXXXXXXXXXXXXXX
+cloud.aws.credentials.secretKey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+```
+
+You should also update `application.properties` with the name of your S3 bucket:
+
+```
+livelessons.s3.bucket=<name>
+```
+
+== Running the Application
+Launch `CloudS3Application` to run the application. It will write to the S3 bucket then
+read and print the same file back again. You can use the online S3 browser to also view
+the file.
+
+== Understanding the Application
+The `spring-cloud-aws` project provides integration between Spring and AWS. In this
+example we are using S3 resource support from `spring-cloud-aws-context`. We are also
+using `spring-cloud-aws-autoconfigure` to provide auto-reconfiguration with Spring Boot.
+
+The S3 support allows you to use Spring's `ResourceLoader` interface to access S3 URLs
+(`s3://bucketname/filename.txt`). The returned `Resource` instance can be used in the same
+way as any regular Spring `Resource` or cast to a `WritableResource`.

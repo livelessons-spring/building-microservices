@@ -1,0 +1,31 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Consume Cloud Services using Cloud Connectors)
+
+== Introduction
+This example shows how you can bind services from you cloud provider to Spring using
+`spring-cloud-connectors`. The provides a nice abstraction that allows your application
+to be portable across different providers.
+
+== Prerequisites
+You will need a https://run.pivotal.io/[Cloud Foundry account] and the
+http://docs.cloudfoundry.org/devguide/installcf/[`cf` command line tool] installed. You
+will also need a service named `ll-car-sql-database` if you don't already have it:
+
+```
+$ cf create-service elephantsql turtle ll-car-sql-database
+```
+
+== Pushing the application to Cloud Foundry
+To push the application type:
+
+```
+$ cf push ll-cc -p target/livelessons-cloud-connectors-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the application
+The `spring-cloud-connectors` project will create a `dataSource` bean for the bound
+service. Look at the `/beans` endpoint to see how its bean name matches the service name.
+
+You can also use the `/cloudinfo` URL (See
+link:src/main/java/demo/ExampleController.java[ExampleController]) to view the
+`ApplicationInstanceInfo` which is provided by `spring-cloud-connectors`.
