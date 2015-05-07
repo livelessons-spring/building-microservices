@@ -1,0 +1,24 @@
+:compat-mode:
+= Lesson 4: Working With Data (Relational Database with JDBC)
+
+== Introduction
+This example shows how you can access a classic relational database using Spring JDBC.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-data-jdbc-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+This demo provides the same domain as the JPA sample but this time the `Car` class is
+a POJO and isn't managed by JPA. The `CarRepository` implements the access logic and
+maps returned rows to the actual object.
+
+This sample also uses `src/main/resources/schema.sql` and `src/main/resources/data.sql`
+scripts (picked up by convention) to create and populate the database.
+
+If you want to try the application with a real MySQL server rather than an in-memory
+database you can uncomment the entries in `src/main/resources/application.properties`.

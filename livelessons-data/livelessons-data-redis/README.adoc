@@ -1,0 +1,34 @@
+:compat-mode:
+= Lesson 4: Working With Data (Redis)
+
+== Introduction
+This example shows how you can use Redis with Spring Boot.
+
+== Prerequisites
+You need a local or remote Redis server to store data. If you are using a remote server
+edit the `application.properties` files.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-redis-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+The `Demo` class shows how you can use `RedisTemplate` to access data and how Redis can
+be used with Spring's caching system.
+
+The `operations()` method show how you can work with low level Redis operations. This
+example increments a value by 1, 2, 3 then 6.
+
+The `javaTypes()` method shows how you can map Redis structures to Java types. Notice how
+when we recreate the map we _don't_ get an empty structure, the previously inserted values
+are immediately available.
+
+The `caching()` method shows how a slow service call can be cached in Redis. The
+`RedisCacheManager` is configured in the main `DataRedisApplication`. The first method
+call is slow, but subsequent calls are fast because they are loaded from Redis. Note as
+well that the same UID is returned (indicating that `SlowService.execute()` is not called
+more than once).
