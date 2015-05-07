@@ -1,0 +1,15 @@
+{
+  "name": "livelessons-web-resources",
+  "version": "1.0.0.SNAPSHOT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}
