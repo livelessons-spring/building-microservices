@@ -1,0 +1,5 @@
+:compat-mode:
+= Lesson 6: Dealing With Integration and Batch Processing
+
+_Connect Microservices using Spring Integration and Spring Batch._
+

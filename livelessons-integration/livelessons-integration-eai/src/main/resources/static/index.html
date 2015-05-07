@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time over WebSocket</title>
+    <script src="http://localhost:8080/sockjs.js"></script>
+    <script type="text/javascript">
+        var sock = new SockJS('http://localhost:8080/messages');
+        sock.onopen = function () {
+            document.getElementById('time').innerHTML = 'Connecting...';
+        };
+        sock.onmessage = function (e) {
+            document.getElementById('time').innerHTML = e.data;
+        };
+        sock.onclose = function () {
+            document.getElementById('time').innerHTML = "Server closed connection or hasn't been started";
+        };
+    </script>
+</head>
+<body>
+<div id="time">Starting...</div>
+</body>
+</html>
