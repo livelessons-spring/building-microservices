@@ -1,0 +1,29 @@
+:compat-mode:
+= Developing Microservices With Spring Boot
+
+== Introduction
+What makes a modern application? A modern application lives on the web. It
+lives in the cloud. It works with all manner of data (big-data, NoSQL,
+in-memory data-grids). It is service-oriented and multi-client ready. It is
+production-ready. It is driven by ever-changing demands and scale.
+
+While it's true that it may no longer be a "Spring" chicken, Spring's maturity
+is well-proven and powering some of the largest and widely used open-web
+applications in the world! And, with the introduction of Spring Boot, it's
+lighter and more productive than ever.
+
+
+== Contents
+This repository contains the example code covered in the LiveLesson video. Use
+the links below to jump to a specific topic:
+
+- Lesson 1: link:livelessons-bootstrap[Bootstrapping (Spring Boot 101)]
+- Lesson 2: link:livelessons-configuration[Using "Twelve-Factor" Style Configuration]
+- Lesson 3: link:livelessons-cloud[Reaching For The Clouds]
+- Lesson 4: link:livelessons-data[Working With Data]
+- Lesson 5: link:livelessons-rest[Giving Your Microservice a REST]
+- Lesson 6: link:livelessons-integration[Dealing With Integration and Batch Processing]
+- Lesson 7: link:livelessons-operations[Creating Operations-Friendly Microservices]
+- Lesson 8: link:livelessons-microservices[Choreographing Microservices]
+- Lesson 9: link:livelessons-web[Developing Web Applications]
+- Lesson 10: link:livelessons-security[Securing Microservices With Spring Security]
