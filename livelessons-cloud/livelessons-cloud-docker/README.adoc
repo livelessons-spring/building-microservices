@@ -1,0 +1,43 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Docker)
+
+== Introduction
+This example shows how you can package a Spring Boot application into a Docker image.
+
+== Prerequisites
+You need have an installed and running https://www.docker.com/[Docker setup]. If you are
+using OSX you should use `Boot2Docker`.
+
+== Building from the command line
+A link:Dockerfile[Dockerfile] is included with this project to allow you to build an image
+from the command line. You can use the following commands:
+
+```
+$ mvn clean package
+$ docker build -t livelessons-cloud-docker .
+```
+
+== Building using Maven
+This project also includes a Maven example which uses the `docker-maven-plugin` from
+Spotify. To build using mave you need to enable the `docker` profile:
+
+```
+$ mvn clean package -Pdocker
+```
+
+== Starting the container
+
+You need to remember to start the Docker container with correct port mappings. The
+following command should be used:
+
+```
+$ docker run -d -p 8080:8080 --name livelessons-cloud-docker livelessons-cloud-docker
+```
+
+To test the application is running you can issue one of the following commands (you
+only need to use the `boot2docker` variant on OSX.
+
+```
+$ curl http://$(boot2docker ip 2>/dev/null):8080
+$ curl http://localhost:8080
+```

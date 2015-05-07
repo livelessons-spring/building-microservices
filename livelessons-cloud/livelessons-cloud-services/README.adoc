@@ -1,0 +1,45 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Consume Cloud Services using Environment Variables)
+
+== Introduction
+This example shows how you can bind services from you cloud provider to Spring using
+environment variables. Here we are using Cloud Foundry but similar principles can be
+used for any cloud provider.
+
+== Prerequisites
+You will need a https://run.pivotal.io/[Cloud Foundry account] and the
+http://docs.cloudfoundry.org/devguide/installcf/[`cf` command line tool] installed. You
+will also need to create two services named `ll-car-sql-database` and
+`ll-car-sql-database2` using the following commands:
+
+```
+$ cf create-service elephantsql turtle ll-car-sql-database
+$ cf create-service elephantsql turtle ll-car-sql-database2
+```
+
+NOTE: Cloud Foundry is clever enough to automatically wire a single datasource into your
+application. We create and bind two databases to prevent this auto-reconfiguration to
+show how environment variables can be used. See link:manifest.yml[manifest.yml] for
+the binding details.
+
+== Pushing the application to Cloud Foundry
+To push the application type:
+
+```
+$ cf push ll-cc -p target/livelessons-cloud-services-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the application
+The link:src/main/resources/application.properties[`application.properties`] defines a
+databsae URL that references the environment variable:
+
+```
+spring.datasource.url=${cloud.services.ll-car-sql-database.connection.jdbcurl}
+```
+
+We also need to ensure that pooling is not enabled since the free Database tier doesn't
+allow multiple connections:
+
+```
+spring.datasource.max-active=1
+```
