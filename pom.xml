@@ -8,5 +8,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>livelessons-parent</module>
+		<module>livelessons-bootstrap</module>
 	</modules>
 </project>

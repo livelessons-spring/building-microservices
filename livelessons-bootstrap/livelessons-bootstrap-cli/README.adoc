@@ -1,0 +1,23 @@
+:compat-mode:
+= Lesson 1: Bootstrapping (Spring Boot CLI)
+
+== Introduction
+This example shows how you can use the Spring Boot CLI to compile, run and jar Groovy
+code.
+
+== Prerequisites
+You need the Spring CLI installed. See http://spring.io/spring-boot[spring.io/spring-boot].
+
+== Running the sample
+Use the following commands to run the application:
+
+```
+$ spring run example.groovy
+```
+
+If you want to generate a jar:
+
+```
+$ spring jar example.jar example.groovy
+```
+

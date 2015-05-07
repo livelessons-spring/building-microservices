@@ -1,0 +1,13 @@
+:compat-mode:
+= Lesson 1: Bootstrapping (Using Gradle)
+
+== Introduction
+This example shows how Spring Boot with Gradle.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ ./gradlew build
+$ java -jar build/libs/livelessons-bootstrap-gradle-0.0.1-SNAPSHOT.jar
+```
