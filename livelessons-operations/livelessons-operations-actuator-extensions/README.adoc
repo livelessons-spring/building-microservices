@@ -1,0 +1,23 @@
+:compat-mode:
+= Lesson 3: Creating Operations-Friendly Microservices (Extending Actuator)
+
+== Introduction
+Demonstrates how you can add your own actuator endpoints.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-operations-actuator-extensions-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+The `WeatherEndpoint` shows how you can easily add actuator endpoints by writing a bean
+that implements the `Endpoint` interface (in this case by extending `AbstractEndpoint`).
+You can access in the same way as the standard ones (HTTP, SSH, JMX).
+
+The `WeatherMvcEndpoint` shows how you can also write specific extensions to be used
+when the endpoint is accessed over HTTP. In this case we are adding a content type
+support. If you open http://localhost:8080/weather in a browser you will see red text,
+if you use `curl` you don't see any HTML markup.

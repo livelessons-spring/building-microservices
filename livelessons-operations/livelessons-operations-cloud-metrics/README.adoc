@@ -1,0 +1,40 @@
+:compat-mode:
+= Lesson 3: Creating Operations-Friendly Microservices (Cloud Metrics)
+
+== Introduction
+This sample shows how you can use Spring Boot Actuator metrics to talk to a cloud
+service. In this example we will use datadog.com.
+
+== Prerequisites
+You need a datadog.com account to run this sample. The offer a free trial. Once you have
+signed-up, login and select the integrations tab to get the API key. Then add it to
+`src/main/resources/application-secrets.properties`:
+
+```
+datadog.apikey=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+```
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-operations-cloud-metrics-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+Live many cloud metrics services datadog.com offers integration with the
+https://dropwizard.github.io/metrics[Dropwizard Metrics] library. Spring Boot also
+supports Dropwizard Metrics so you can use the two together with relative ease.
+
+The project `pom.xml` includes dependencies to `io.dropwizard.metrics:metrics-core` and
+the `org.coursera:dropwizard-metrics-datadog` integration library. See
+`OperationsCloudMetricsApplication` for the actual datadog configuration.
+
+To see the actual request/response HTML you can uncomment the following in
+`application.properties`:
+
+```
+logging.level.org.coursera.metrics.datadog=DEBUG
+```

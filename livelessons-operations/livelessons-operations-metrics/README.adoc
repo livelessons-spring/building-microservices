@@ -1,0 +1,31 @@
+:compat-mode:
+= Lesson 3: Creating Operations-Friendly Microservices (Metrics)
+
+== Introduction
+This sample shows how you can use and extend the Spring Boot Actuator Metrics system.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-operations-metrics-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+
+=== Logging metrics
+Several metrics are automatically logged out of the box, however, it is also possible to
+log your own values. The `ExampleService` shows how to call the `CounterService` and the
+`GaugeService`.
+
+=== Custom PublicMetrics
+The `PublicMetrics` interface allows you to expose information from any source to the
+metrics system. The `ExamplePublicMetrics` provides an example.
+
+=== Rich metrics
+My default, metrics are recorded in an InMemory repository and simply exposed by the
+service. If you also want to keep maximum, minimum and average values you can use a
+`InMemoryRichGaugeRepository` `@Primary` bean. Uncomment the code in
+`OperationsMetricsApplication` for an example.
+

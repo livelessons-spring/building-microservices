@@ -1,0 +1,12 @@
+:compat-mode:
+= Lesson 7: Creating Operations-Friendly Microservices
+
+_Learn how to build production-ready Microservices._
+
+- link:livelessons-operations-logging[Logging]
+- link:livelessons-operations-actuator[Actuator]
+- link:livelessons-operations-monitoring[Monitoring]
+- link:livelessons-operations-cloud-monitoring[Monitoring in the Cloud]
+- link:livelessons-operations-metrics[Metrics]
+- link:livelessons-operations-cloud-metrics[Metrics in the Cloud]
+- link:livelessons-operations-actuator-extensions[Extending Actuator]
