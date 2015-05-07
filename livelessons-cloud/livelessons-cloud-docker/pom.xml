@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>livelessons</groupId>
+		<artifactId>livelessons-cloud</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>livelessons-cloud-docker</artifactId>
+	<properties>
+		<main.basedir>../..</main.basedir>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>docker</id>
+				<build>
+					<plugins>
+						<plugin>
+							<groupId>com.spotify</groupId>
+							<artifactId>docker-maven-plugin</artifactId>
+							<version>0.1.1</version>
+							<configuration>
+								<imageName>livelessons-cloud-boot</imageName>
+								<baseImage>dockerfile/java:oracle-java8</baseImage>
+								<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+								<resources>
+									<resource>
+										<targetPath>/</targetPath>
+										<directory>${project.build.directory}</directory>
+										<include>${project.build.finalName}.jar</include>
+									</resource>
+								</resources>
+							</configuration>
+							<executions>
+								<execution>
+									<id>docker</id>
+									<phase>package</phase>
+									<goals>
+										<goal>build</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

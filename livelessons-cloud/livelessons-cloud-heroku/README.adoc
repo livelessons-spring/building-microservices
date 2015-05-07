@@ -1,0 +1,28 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Heroku)
+
+== Introduction
+This example shows how you can push a Spring Boot application to Heroku. You
+will need a https://heroku.com/[Heroku account] and the
+https://devcenter.heroku.com/articles/getting-started-with-java#set-up[`heroku` command
+line toolbelt] installed. This sample uses the `heroku-maven-plugin` to directly push
+the build application jar.
+
+== Prerequisites
+Ensure that you have logged into Heroku and created an application:
+
+```
+$ heroku login
+$ heroku create -n
+```
+
+You will need the name of the created application later.
+
+== Pushing to Heroku
+To build an push the application use the following command:
+
+```
+$ mvn clean package heroku:deploy -Dheroku.appName=<appname>
+```
+
+NOTE: The upload to Heroku can take some time to complete.

@@ -1,0 +1,19 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Cloud Foundry)
+
+== Introduction
+This example shows how you can push a Spring Boot application to Cloud Foundry. You
+will need a https://run.pivotal.io/[Cloud Foundry account] and the
+http://docs.cloudfoundry.org/devguide/installcf/[`cf` command line tool] installed.
+
+== Pushing to Cloud Foundry
+You can build and push the application as follows:
+
+```
+$ mvn clean package
+$ cf push <appname> -p target/livelessons-cloud-cloudfoundry-1.0.0-SNAPSHOT.jar
+```
+
+
+
+

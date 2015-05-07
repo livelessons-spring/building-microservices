@@ -1,0 +1,50 @@
+:compat-mode:
+= Lesson 3: Reaching For The Clouds (Spring Session)
+
+== Introduction
+This example shows how you can use Redis as backing store for HTTP session data. Unlike
+the standard session, Redis is a service which remains up even if your application is
+restarted.
+
+== Prerequisites
+You will need a https://run.pivotal.io/[Cloud Foundry account] and the
+http://docs.cloudfoundry.org/devguide/installcf/[`cf` command line tool] installed. You
+will also need a Redis service named `ll-cloud-session`:
+
+```
+$ cf create-service rediscloud 25mb ll-cloud-session
+```
+
+== Testing without Redis
+Before showing session data stored in Redis it is helpful to understand how regular
+session data works. To do this you can modify the application by commenting out the
+`@EnableRedisHttpSession` annotation in `CloudSessionApplication`. You can then try
+the following:
+
+```
+$ mvn clean package
+$ cf push ll-cloud-session -p target/livelessons-cloud-session-1.0.0-SNAPSHOT.jar
+```
+
+Open a browser to the application and refresh it a few times. You should see the same
+UID displayed. Now lets retart the application (keep the browser open):
+
+```
+cf stop ll-cloud-session
+cf start ll-cloud-session
+```
+
+If you now refresh the browser again you should see that a new UID is generated. The old
+session has gone.
+
+== Testing with Redis
+To test with a Redis session restore the `@EnableRedisHttpSession` the rebuild an push the
+application:
+
+```
+$ mvn clean package
+$ cf push ll-cloud-session -p target/livelessons-cloud-session-1.0.0-SNAPSHOT.jar
+```
+
+Repeat the steps above to view the UID in a browser. This time when you restart the
+application the session should remain and the same UID will always be displayed.
