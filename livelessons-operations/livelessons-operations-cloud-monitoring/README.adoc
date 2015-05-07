@@ -1,0 +1,96 @@
+:compat-mode:
+= Lesson 3: Creating Operations-Friendly Microservices (Monitoring)
+
+== Introduction
+This sample shows how you can monitor your Spring Boot microservice when it is deployed
+to the cloud.
+
+== Prerequisites
+You will need a https://run.pivotal.io/[Cloud Foundry account] and the
+http://docs.cloudfoundry.org/devguide/installcf/[`cf` command line tool] installed.
+
+== Building and Pushing
+To build an push the application to Cloud Foundry use the following commands:
+
+```
+$ mvn clean package
+cf push ll-cloud-monitoring -p target/livelessons-operations-cloud-monitoring-1.0.0-SNAPSHOT.jar
+```
+
+== Updating the Health status
+The `/health` status can be manipulated using the `/up` and `/down` request mappings in
+`ExampleController`. For example:
+
+```
+$ curl ll-cloud-monitoring.cfapps.io/down
+$ curl ll-cloud-monitoring.cfapps.io/health
+```
+
+will return the status
+
+```json
+{"status":"DOWN"}
+```
+
+and
+
+```
+$ curl ll-cloud-monitoring.cfapps.io/up
+$ curl ll-cloud-monitoring.cfapps.io/health
+```
+
+will restore it to
+
+```json
+{"status":"UP"}
+```
+
+== Monitoring with pingdom.com
+https://www.pingdom.com/[Pingdom] is an online monitoring service that provides alerts
+whenever a service goes down. That also provide historical graphs for uptime information.
+A free ``starter'' account is available.
+
+To configure pingdom, signup and login to the service then from main dashboard click the
+``monitoring'' tab.
+
+Click add new and use the following details:
+
+- Name of check: livelessons
+- Check interval: 1 min
+- Check Type: Web (HTTP)
+- URL: http://ll-cloud-monitoring.cfapps.io/health (or whatever your URL is)
+
+Once added the service will take a minute or so to perform the first check. You can
+simulate down time to trigger alerts.
+
+== Monitoring with uptimerobot.com
+https://uptimerobot.com[UptimeRobot] is another online monitoring tool that offers a free
+account. To get started signup then login and navigate to the dashboard. To add a monitor
+click ``Add New Monitor'' then enter the following:
+
+- Monitor Type: HTTP(s)
+- Friendly Name: livelessons
+- URL: http://ll-cloud-monitoring.cfapps.io/health (or whatever your URL is)
+- Monitor Interval: 5 mins
+
+You can use `/down` to simulate down time and trigger alerts.
+
+== New Relic
+New Relic provides deep insight monitoring for your application. It's available as a
+service on Cloud Foundry.
+
+To add the service use the dashboard from `run.pivotal.io` or add it using the CLI:
+
+```
+$ cf create-service newrelic standard ll-new-relic
+```
+
+You now need to bind the service to your application then restage it:
+
+```
+$ cf bind-service ll-cloud-monitoring ll-new-relic
+$ cf restage ll-cloud-monitoring
+```
+
+Once restaged you can click "manage" on the `ll-new-relic` service at
+http://run.pivotal.io[run.pivotal.io] to monitor the application.

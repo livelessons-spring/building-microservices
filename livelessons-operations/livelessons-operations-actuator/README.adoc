@@ -1,0 +1,76 @@
+:compat-mode:
+= Lesson 3: Creating Operations-Friendly Microservices (Logging)
+
+== Introduction
+Provides an introduction to Spring Boot Actuator.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-operations-actuator-1.0.0-SNAPSHOT.jar
+```
+
+== HTTP Endpoints
+The following HTTP endpoints can be inspected in a running application:
+
+- http://localhost:8080/autoconfig[/autoconfig]
+- http://localhost:8080/beans[/beans]
+- http://localhost:8080/configprops[/configprops]
+- http://localhost:8080/dump[/dump]
+- http://localhost:8080/env[/env]
+- http://localhost:8080/health[/health]
+- http://localhost:8080/info[/info]
+- http://localhost:8080/metrics[/metrics]
+- http://localhost:8080/mappings[/mappings]
+- http://localhost:8080/trace[/trace]
+
+== JMX
+To view the same information using JMX you can use `jconsole`:
+
+```
+$ jconsole
+```
+
+Select `demo.OperationsActuatorApplication` from the ``local applications'' section (use
+insecure connection if asked) then click on the MBeans tab. You can the endpoints under
+`org.springframework.boot/Endpoint` pick an endpoint then click the `getData` button
+under `operations`.
+
+== SSH
+You can ssh into the running application using the following command:
+
+```
+$ ssh -p 2000 livelessons@localhost
+```
+
+The password is `livelessons` (see `application.properties`).
+
+Type `help` to get a list of commands. Endpoints can be executed using
+`endpoint invoke <name>` (for example `endpoint invoke info`). Several endpoints are
+also surfaced directly (for example `metrics`). The `dashboard` command is also quite
+fun.
+
+
+== JMX over Jolokia
+Jolokia allows you to expose JMX beans over HTTP. Adding the library is all you need to
+do to configure it with Spring Boot. It can be useful if you have existing MBeans (or
+MBeans exposed by libraries that you use).
+
+Here is an example call that will return `HeapMemoryUsage` information from the `Memory`
+MBean in `java/lang`:
+
+```
+$ curl http://localhost:8080/jolokia/read/java.lang:type=Memory/HeapMemoryUsage
+```
+
+== Using the Git Commit ID
+This sample includes the `git-commit-id-plugin`Maven Plugin which will write a
+`git.properties` file whenever the project is build. This information is automatically
+exposed on the `/info` endpoint.
+
+The commit SHA is very useful when running applications in production as it allows you
+to know exactly which commit was used to build the running app. You also use this to
+get back to the `POM.xml` or `build.gradle` and know exactly which library versions were
+used when the app was built.

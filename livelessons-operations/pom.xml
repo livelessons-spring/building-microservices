@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>livelessons</groupId>
+		<artifactId>livelessons-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../livelessons-parent</relativePath>
+	</parent>
+	<artifactId>livelessons-operations</artifactId>
+	<packaging>pom</packaging>
+	<properties>
+		<main.basedir>..</main.basedir>
+	</properties>
+	<modules>
+		<module>livelessons-operations-logging</module>
+		<module>livelessons-operations-actuator</module>
+		<module>livelessons-operations-monitoring</module>
+		<module>livelessons-operations-cloud-monitoring</module>
+		<module>livelessons-operations-metrics</module>
+		<module>livelessons-operations-cloud-metrics</module>
+		<module>livelessons-operations-actuator-extensions</module>
+	</modules>
+</project>
