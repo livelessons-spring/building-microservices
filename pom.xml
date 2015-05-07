@@ -14,5 +14,6 @@
 		<module>livelessons-data</module>
 		<module>livelessons-rest</module>
 		<module>livelessons-integration</module>
+		<module>livelessons-operations</module>
 	</modules>
 </project>
