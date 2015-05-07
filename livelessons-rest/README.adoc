@@ -1,0 +1,8 @@
+:compat-mode:
+= Lesson 5: Giving Your Microservice a REST
+
+_Why the web is a existence proof of the HTTP architecture and how to build
+services that exploit that._
+
+- link:livelessons-rest-basic[Basic]
+- link:livelessons-rest-sync[Sync]
