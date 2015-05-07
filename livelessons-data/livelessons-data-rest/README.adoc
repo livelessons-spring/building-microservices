@@ -1,0 +1,23 @@
+:compat-mode:
+= Lesson 4: Working With Data (Spring Data REST)
+
+== Introduction
+This example shows how you can expose a Spring Data Repoistory over REST.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-data-rest-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+This is exactly the same code as the JPA example, except we have an additional
+`spring-boot-starter-data-rest` dependency. The `CarRepository` also includes a couple
+of new annotations. The `@RestResource(path="find")` provides a nicer name for the search
+URL and `@Param("make")` is used to indicate the name of the query parameter.
+
+Once running you can open a browser to http://localhost:8080/cars to navigate the
+elements. To perform a search you can use URLs in the form
+http://localhost:8080/cars/search/find?make=honda.
