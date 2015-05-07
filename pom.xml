@@ -11,5 +11,6 @@
 		<module>livelessons-bootstrap</module>
 		<module>livelessons-configuration</module>
 		<module>livelessons-cloud</module>
+		<module>livelessons-data</module>
 	</modules>
 </project>

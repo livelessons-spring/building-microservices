@@ -1,0 +1,26 @@
+:compat-mode:
+= Lesson 4: Working With Data (Elasticsearch)
+
+== Introduction
+This example shows how you can connect your microservce to Elasticsearch.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-data-elasticsearch-1.0.0-SNAPSHOT.jar
+```
+
+The example uses an embedded elasticsearch server to store data. If you want to talk
+to a real server you can set `spring.data.elasticsearch.cluster-name` and
+`spring.data.elasticsearch.cluster-nodes` properties.
+
+== Understanding the code
+The familiar Car domain is used again in this example. This time `Car` is a elasticsearch
+document (signified with the Spring Data `@Document` annotation). The same `Repository`
+logic is used as before providing a `findByMakeIgnoringCase` method.
+
+The `DataElasticsearchApplication` class also shows how you can use the
+`ElasticsearchTemplate` to make native elasticsearch queries. In this case we are
+performing a fuzzy search for manufacturers like `ronda`.

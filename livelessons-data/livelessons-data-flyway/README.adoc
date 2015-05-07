@@ -1,0 +1,22 @@
+:compat-mode:
+= Lesson 4: Working With Data (Flyway Migration)
+
+== Introduction
+This example shows how you can use flyway to upgrade a live database.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-flyway-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+Building on the earlier JPA example this demo shows how a new `color` column could be
+added to the database. The additional `flyway` dependency in the `pom.xml` along with
+scripts in `src/main/db/migration` is all that's needed.
+
+Two scripts are provided. The first creates the initial structure and the second upgrades
+it. Flyway adds an additional meta-table that tracks when an update has been applied and
+prevents it from running multiple times.
