@@ -13,5 +13,6 @@
 		<module>livelessons-cloud</module>
 		<module>livelessons-data</module>
 		<module>livelessons-rest</module>
+		<module>livelessons-integration</module>
 	</modules>
 </project>
