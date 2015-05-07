@@ -9,5 +9,6 @@
 	<modules>
 		<module>livelessons-parent</module>
 		<module>livelessons-bootstrap</module>
+		<module>livelessons-configuration</module>
 	</modules>
 </project>

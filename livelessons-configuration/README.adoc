@@ -1,0 +1,9 @@
+:compat-mode:
+= Lesson 2: Using ``Twelve-Factor'' Style Configuration
+
+_The 12 factor manifesto, external configuration and how these concepts are
+supported in Spring._
+
+- link:livelesson-configuration-basic[Basic]
+- link:livelesson-configuration-cloudclient[Cloud Client]
+- link:livelesson-configuration-cloudserver[Cloud Server]
