@@ -1,0 +1,28 @@
+:compat-mode:
+= Lesson 9: Developing Web Applications (Transforms)
+
+== Introduction
+Builds on the _templating_ example to show how you can use Spring's resource
+resolvers and transformers to implement cache-busting.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-web-transforms-1.0.0-SNAPSHOT.jar
+```
+
+== Understanding the code
+The `WebTransformsApplication` class includes addition configuration to register special
+resource handlers that ``fingerprint'' URLs. When `application.devmode` is set to `false`
+in the `application.properties` two different version resolver strategies are used. All
+JavaScript resources are prefixed with an application ID, and any other resource is
+post-fixed with a SHA of its content.
+
+To test the application open a browser to http://localhost:8080 and enable networking
+tools. Notice how URLs inside the page are rewritten (e.g. `/css/page.css` and all its
+`@imports`). If you hit return in the browser URL bar you'll notice that only a single
+request is needed to re-render the page. If you turn set `application.devmode` to `true`
+and repeat the experiment you'll notice that multiple request are made when the page
+is refreshed.

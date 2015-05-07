@@ -1,0 +1,9 @@
+:compat-mode:
+= Lesson 9: Developing Web Applications
+
+_Basics of developing web applications to consume your Microservices._
+
+- link:livelessons-web-resources[Resources]
+- link:livelessons-web-resources-angular[Resources (Angular)]
+- link:livelessons-web-templates[Templating]
+- link:livelessons-web-transforms[Transforms]
