@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>LiveLessons - Bower</title>
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/js/jquery.lettering.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+	<div class="container">
+		<div>
+			<h2>LiveLessons</h2>
+			<h2>Bower</h2>
+			<h2>Spring Boot</h2>
+		</div>
+	</div>
+	<script>
+		$(document).ready(
+				function() {
+					$("div.container > div").addClass('os-phrases')
+					$(".os-phrases > h2").lettering('words').children("span")
+							.lettering().children("span").lettering();
+				})
+	</script>
+</body>
+</html>
