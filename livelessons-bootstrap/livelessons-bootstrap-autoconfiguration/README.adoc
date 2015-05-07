@@ -1,0 +1,27 @@
+:compat-mode:
+= Lesson 1: Bootstrapping (Understanding Auto-configuration)
+
+== Introduction
+This example shows how Spring Boot auto-configuration works.
+
+== Building and running the sample
+Use the following commands to build run the application:
+
+```
+$ mvn clean package
+$ java -jar target/livelessons-bootstrap-autoconfigure-1.0.0-SNAPSHOT.jar
+```
+
+== About the code
+This example adds auto-configuration to show how the process generally works. The
+`src/main/resources/META-ING/spring.factories` contains a single entry which points
+to `LogTomcatVersionAutoConfiguration`. This class simply logs the current version
+of Tomcat.
+
+There are a couple of `@Conditions` on `LogTomcatVersionAutoConfiguration` which affect
+when it is used. The `@ConditionalOnClass` annotation makes sure that Tomcat has been
+declared as a dependency. The `@ConditionalOnProperty` annotation shows how you can
+check that a property has a specific value.
+
+You can change the `application.properties` file or the `pom.xml` file if you want to test
+the conditions.
