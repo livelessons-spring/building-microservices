@@ -1,0 +1,13 @@
+:compat-mode:
+= Lesson 8: Choreographing Microservices
+
+_Understand how to build robust and failure-tolerant Microservices._
+
+
+
+This section demonstrates:
+
+- how to handle service registration using Eureka (though Consul is also supported).
+- how to use Ribbon client-side load-balancing to dispatch calls in various ways  using `DiscoveryClient`, using a blessed `RestTemplate` instance, and using the Feign & Spring MVC integration. Start everything up and then run `PassportServiceApplication` to see this working.
+- how  to use Hystrix and the  Hystrix dashboard to manage problematic service-to-service calls. You can see this in action by now disabling the `PhotoServiceApplication` (if you're in IntelliJ, remember to click the 'Exit' button which is the fifth one down from the top left - an arrow pointing to a door, under the camera icon and _not_ the 'Stop' or 'Pause' ones) and then re-running the `PassportServiceApplication`.
+- How to use Zuul to expose and aggregate backend microservices via an edge gateway. 
