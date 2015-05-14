@@ -1,5 +1,9 @@
 :compat-mode:
-= Developing Microservices With Spring Boot
+= Developing Microservices With Spring Boot 
+
+This is the code accompanying the Livelessons video training course, _Building Microservices with Spring Boot_,
+by http://twitter.com/starbuxman[Josh Long] and http://twitter.com/phillip_webb[Phil Webb]. 
+
 
 == Introduction
 What makes a modern application? A modern application lives on the web. It
