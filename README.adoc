@@ -1,7 +1,7 @@
 :compat-mode:
 = Developing Microservices With Spring Boot 
 
-This is the code accompanying the Livelessons video training course, _Building Microservices with Spring Boot_,
+This is the code accompanying the Livelessons video training course, https://www.safaribooksonline.com/library/view/building-microservices-with/9780134192468/[_Building Microservices with Spring Boot_],
 by http://twitter.com/starbuxman[Josh Long] and http://twitter.com/phillip_webb[Phil Webb]. 
 
 
