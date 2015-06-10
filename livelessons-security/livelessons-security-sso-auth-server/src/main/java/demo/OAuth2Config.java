@@ -9,8 +9,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 
 @Configuration
-@EnableAuthorizationServer class OAuth2Config extends
-			AuthorizationServerConfigurerAdapter {
+@EnableAuthorizationServer
+class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
