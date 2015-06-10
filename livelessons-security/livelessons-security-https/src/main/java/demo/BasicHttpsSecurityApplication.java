@@ -18,25 +18,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @SpringBootApplication
 public class BasicHttpsSecurityApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BasicHttpsSecurityApplication.class, args);
-	}
-
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-
-	@Bean
-	public UserDetailsService providerUserDetailsService() {
-		RowMapper<User> userRowMapper = (rs, i) -> new User(
-				rs.getString("ACCOUNT_NAME"),
-				rs.getString("PASSWORD"),
-				rs.getBoolean("ENABLED"),
-				rs.getBoolean("ENABLED"),
-				rs.getBoolean("ENABLED"),
-				rs.getBoolean("ENABLED"),
-				AuthorityUtils.createAuthorityList("ROLE_USER", "ROLE_ADMIN"));
-		return username -> jdbcTemplate.queryForObject("select * from ACCOUNT where ACCOUNT_NAME = ?",
-				userRowMapper, username);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BasicHttpsSecurityApplication.class, args);
+    }
 
 }
