@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This sets up a Web Socket flow that takes incoming messages (against
  * {@code /hi} REST endpoint) and then {@link demo.EchoService#echo(String)}
  * s them to all listening clients (from {@code /}.
- * <p/>
+ * 
  * Thanks to Artem Bilan for help in getting the websocket example working!
  */
 @Configuration
