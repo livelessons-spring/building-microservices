@@ -21,17 +21,3 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
     }
 
 }
-
-
-/*
-@Configuration
-@EnableGlobalAuthentication
-public class SecurityConfig  {
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth,
-                                UserDetailsService userDetailsService) throws Exception {
-        auth.userDetailsService(userDetailsService);
-    }
-}
-*/
