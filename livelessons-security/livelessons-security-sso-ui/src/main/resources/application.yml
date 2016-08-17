@@ -10,7 +10,7 @@ zuul:
     user:
       path: /user/**
       url: http://localhost:9999/uaa/user
-spring:
+security:
   oauth2:
     sso:
       home:
