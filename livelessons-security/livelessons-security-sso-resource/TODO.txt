@@ -1,0 +1,1 @@
+https://github.com/SpringOne2GX-2014/microservice-security/blob/master/certs/src/test/java/sample/tomcat/X509ApplicationTests.java

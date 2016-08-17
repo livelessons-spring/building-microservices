@@ -1,0 +1,11 @@
+server:
+  ssl:
+    keyStore: classpath:server.jks
+    trustStore: classpath:server.jks
+    keyStorePassword: password
+    trustStorePassword: password
+    keyAlias: servercert
+    clientAuth: NEED
+logging:
+  level:
+    org.springframework.security: DEBUG
