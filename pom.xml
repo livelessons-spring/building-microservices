@@ -19,5 +19,6 @@
 		<module>livelessons-web</module>
 		<module>livelessons-security</module>
 		<module>livelessons-testing</module>
+		<module>livelessons-extending</module>
 	</modules>
 </project>
