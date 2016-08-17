@@ -18,5 +18,6 @@
 		<module>livelessons-choreography</module>
 		<module>livelessons-web</module>
 		<module>livelessons-security</module>
+		<module>livelessons-testing</module>
 	</modules>
 </project>
