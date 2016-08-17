@@ -12,7 +12,6 @@ import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +27,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.ResourceAccessException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -55,8 +56,8 @@ public class BasicHttpsSecurityApplicationTests {
 	public void testUnauthenticatedHello() throws Exception {
 		ResponseEntity<String> httpsEntity = this.restTemplate.getForEntity("/hi",
 				String.class);
-		Assert.assertEquals(HttpStatus.OK, httpsEntity.getStatusCode());
-		Assert.assertTrue(httpsEntity.getBody().toLowerCase().contains("hello, world"));
+		assertThat(httpsEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, world");
 	}
 
 	@Test
@@ -67,8 +68,8 @@ public class BasicHttpsSecurityApplicationTests {
 						.custom().setSSLSocketFactory(socketFactory()).build()));
 		ResponseEntity<String> httpsEntity = restTemplate
 				.getForEntity("https://localhost:" + this.port + "/hi", String.class);
-		Assert.assertEquals(HttpStatus.OK, httpsEntity.getStatusCode());
-		Assert.assertTrue(httpsEntity.getBody().toLowerCase().contains("hello, world"));
+		assertThat(httpsEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, world");
 	}
 
 	private SSLConnectionSocketFactory socketFactory() throws Exception {
