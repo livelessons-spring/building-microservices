@@ -2,7 +2,6 @@ package demo;
 
 import java.util.Random;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ public class ExampleService {
 
 	private final GaugeService gaugeService;
 
-	@Autowired
 	public ExampleService(CounterService counterService, GaugeService gaugeService) {
 		this.counterService = counterService;
 		this.gaugeService = gaugeService;
@@ -24,7 +22,7 @@ public class ExampleService {
 
 	public void call() {
 		this.counterService.increment("example.counter");
-		this.gaugeService.submit("example.gauge", random.nextDouble());
+		this.gaugeService.submit("example.gauge", this.random.nextDouble());
 	}
 
 }

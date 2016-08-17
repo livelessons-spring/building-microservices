@@ -6,7 +6,6 @@ import java.io.OutputStreamWriter;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,12 +22,15 @@ public class CloudS3Application {
 	@Value("${livelessons.s3.bucket}")
 	private String bucket;
 
-	@Autowired
-	public ResourceLoader resourceLoader;
+	private final ResourceLoader resourceLoader;
+
+	public CloudS3Application(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
+	}
 
 	@PostConstruct
 	public void resourceAccess() throws IOException {
-		String location = "s3://" + bucket + "/file.txt";
+		String location = "s3://" + this.bucket + "/file.txt";
 		WritableResource writeableResource = (WritableResource) this.resourceLoader
 				.getResource(location);
 		FileCopyUtils.copy("Hello World!",

@@ -2,7 +2,6 @@ package demo;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -13,8 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscoveryClientExample implements CommandLineRunner {
 
-	@Autowired
-	private DiscoveryClient discoveryClient;
+	private final DiscoveryClient discoveryClient;
+
+	public DiscoveryClientExample(DiscoveryClient discoveryClient) {
+		this.discoveryClient = discoveryClient;
+	}
 
 	@Override
 	public void run(String... strings) throws Exception {

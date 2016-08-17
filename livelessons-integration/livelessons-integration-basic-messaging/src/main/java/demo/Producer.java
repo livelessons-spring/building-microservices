@@ -6,15 +6,17 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Producer implements CommandLineRunner {
 
-	@Autowired
-	private RabbitMessagingTemplate messagingTemplate;
+	private final RabbitMessagingTemplate messagingTemplate;
+
+	public Producer(RabbitMessagingTemplate messagingTemplate) {
+		this.messagingTemplate = messagingTemplate;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {

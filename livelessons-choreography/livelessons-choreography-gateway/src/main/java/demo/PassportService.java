@@ -4,20 +4,23 @@ import reactor.Environment;
 import reactor.rx.Stream;
 import reactor.rx.Streams;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PassportService {
 
-	@Autowired
-	private Environment environment;
+	private final Environment environment;
 
-	@Autowired
-	private ContactClient contactClient;
+	private final ContactClient contactClient;
 
-	@Autowired
-	private BookmarkClient bookmarkClient;
+	private final BookmarkClient bookmarkClient;
+
+	public PassportService(Environment environment, ContactClient contactClient,
+			BookmarkClient bookmarkClient) {
+		this.environment = environment;
+		this.contactClient = contactClient;
+		this.bookmarkClient = bookmarkClient;
+	}
 
 	public Stream<Bookmark> getBookmarks(String userId) {
 		return Streams.<Bookmark>create(subscriber -> {

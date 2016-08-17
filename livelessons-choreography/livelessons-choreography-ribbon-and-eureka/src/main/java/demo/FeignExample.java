@@ -1,6 +1,5 @@
 package demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -9,11 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class FeignExample implements CommandLineRunner {
 
-	@Autowired
-	private ContactClient contactClient;
+	private final ContactClient contactClient;
 
-	@Autowired
-	private BookmarkClient bookmarkClient;
+	private final BookmarkClient bookmarkClient;
+
+	public FeignExample(ContactClient contactClient, BookmarkClient bookmarkClient) {
+		this.contactClient = contactClient;
+		this.bookmarkClient = bookmarkClient;
+	}
 
 	@Override
 	public void run(String... strings) throws Exception {

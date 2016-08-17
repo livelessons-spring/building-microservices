@@ -2,7 +2,6 @@ package demo;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.annotation.Order;
@@ -15,8 +14,11 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class RestTemplateExample implements CommandLineRunner {
 
-	@Autowired
-	private RestTemplate restTemplate;
+	private final RestTemplate restTemplate;
+
+	public RestTemplateExample(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
 
 	@Override
 	public void run(String... strings) throws Exception {

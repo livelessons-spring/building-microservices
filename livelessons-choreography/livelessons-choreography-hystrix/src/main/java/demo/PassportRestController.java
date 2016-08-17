@@ -1,6 +1,5 @@
 package demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class PassportRestController {
 
-	@Autowired
-	private IntegrationClient integrationClient;
+	private final IntegrationClient integrationClient;
+
+	public PassportRestController(IntegrationClient integrationClient) {
+		this.integrationClient = integrationClient;
+	}
 
 	@RequestMapping("/{userId}/passport")
 	Passport passport(@PathVariable String userId) {

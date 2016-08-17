@@ -1,6 +1,5 @@
 package demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.app.ApplicationInstanceInfo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ public class ExampleController {
 
 	private final ApplicationInstanceInfo info;
 
-	@Autowired
 	public ExampleController(JdbcTemplate jdbc, ApplicationInstanceInfo info) {
 		this.jdbc = jdbc;
 		this.info = info;
@@ -21,12 +19,13 @@ public class ExampleController {
 
 	@RequestMapping("/")
 	public String hello() {
-		return jdbc.queryForObject("select model from car where id = 1", String.class);
+		return this.jdbc.queryForObject("select model from car where id = 1",
+				String.class);
 	}
 
 	@RequestMapping("/cloudinfo")
 	public ApplicationInstanceInfo info() {
-		return info;
+		return this.info;
 	}
 
 }
