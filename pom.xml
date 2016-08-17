@@ -20,5 +20,6 @@
 		<module>livelessons-security</module>
 		<module>livelessons-testing</module>
 		<module>livelessons-extending</module>
+		<module>livelessons-ide-and-tooling</module>
 	</modules>
 </project>

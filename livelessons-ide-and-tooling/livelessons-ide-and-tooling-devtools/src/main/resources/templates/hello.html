@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<title>Hello</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="hello" th:text="${helloMessage}">Hello</div>
+	<div class="my-index">My Index Is</div>
+	<div class="index" th:text="${index}">0</div>
+	<div class="mid-color" th:text="'Uptime: ' + ${uptime}">Uptime: </div>
+	<div class="bottom-color"></div>
+</body>
+</html>
+
+
+
