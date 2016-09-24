@@ -16,7 +16,6 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.JobExecutionEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
@@ -88,13 +87,16 @@ public class ContactBatchJobConfiguration {
 	public static class BatchJobFinishedListener
 			implements ApplicationListener<JobExecutionEvent> {
 
-		@Autowired
-		private JdbcTemplate jdbcTemplate;
+		private final JdbcTemplate jdbcTemplate;
+
+		public BatchJobFinishedListener(JdbcTemplate jdbcTemplate) {
+			this.jdbcTemplate = jdbcTemplate;
+		}
 
 		@Override
 		public void onApplicationEvent(JobExecutionEvent event) {
 			System.out.println("finished " + event.getJobExecution().toString());
-			jdbcTemplate
+			this.jdbcTemplate
 					.query("SELECT first_name, last_name, email FROM contact",
 							(rs, i) -> new Contact(rs.getString("first_name"),
 									rs.getString("last_name"), rs.getString("email")))

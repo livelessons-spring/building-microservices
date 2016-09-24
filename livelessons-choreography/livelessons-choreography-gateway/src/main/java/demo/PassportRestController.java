@@ -2,7 +2,6 @@ package demo;
 
 import reactor.rx.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,8 +10,11 @@ import org.springframework.web.context.request.async.DeferredResult;
 @RestController
 public class PassportRestController {
 
-	@Autowired
-	private PassportService passportService;
+	private final PassportService passportService;
+
+	public PassportRestController(PassportService passportService) {
+		this.passportService = passportService;
+	}
 
 	@RequestMapping("/{userId}/passport")
 	public DeferredResult<Passport> passport(@PathVariable String userId) {

@@ -9,7 +9,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 
-import static org.elasticsearch.index.query.QueryBuilders.fuzzyLikeThisFieldQuery;
+import static org.elasticsearch.index.query.QueryBuilders.fuzzyQuery;
 
 @SpringBootApplication
 public class DataElasticsearchApplication {
@@ -33,7 +33,7 @@ public class DataElasticsearchApplication {
 
 			System.err.println("\nFrom the template...");
 			SearchQuery query = new NativeSearchQueryBuilder()
-					.withQuery(fuzzyLikeThisFieldQuery("make").likeText("Ronda")).build();
+					.withQuery(fuzzyQuery("make", "Ronda")).build();
 			template.queryForList(query, Car.class).forEach(System.err::println);
 		};
 	}

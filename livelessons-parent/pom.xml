@@ -7,15 +7,14 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<parent>
-		<groupId>org.springframework.cloud</groupId>
-		<artifactId>spring-cloud-starter-parent</artifactId>
-		<version>1.0.2.RELEASE</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.1.RELEASE</version>
 		<relativePath />
 	</parent>
 	<properties>
 		<main.basedir>../..</main.basedir>
 		<java.version>1.8</java.version>
-		<spring-security-oauth.version>2.0.6.RELEASE</spring-security-oauth.version>
 	</properties>
 	<build>
 		<plugins>

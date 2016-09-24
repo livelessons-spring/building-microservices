@@ -5,17 +5,19 @@ import java.util.Collection;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 class IntegrationClient {
 
-	@Autowired
-	private ContactClient contactClient;
+	private final ContactClient contactClient;
 
-	@Autowired
-	private BookmarkClient bookmarkClient;
+	private final BookmarkClient bookmarkClient;
+
+	public IntegrationClient(ContactClient contactClient, BookmarkClient bookmarkClient) {
+		this.contactClient = contactClient;
+		this.bookmarkClient = bookmarkClient;
+	}
 
 	public Collection<Bookmark> getBookmarksFallback(String userId) {
 		System.out.println("getBookmarksFallback");

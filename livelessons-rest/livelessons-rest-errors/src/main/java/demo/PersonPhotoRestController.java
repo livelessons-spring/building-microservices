@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URI;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -29,8 +28,11 @@ public class PersonPhotoRestController {
 
 	private File root;
 
-	@Autowired
-	private PersonRepository personRepository;
+	private final PersonRepository personRepository;
+
+	public PersonPhotoRestController(PersonRepository personRepository) {
+		this.personRepository = personRepository;
+	}
 
 	@Value("${user.home}")
 	void setUserHome(String home) {
