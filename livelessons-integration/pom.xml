@@ -17,5 +17,32 @@
 		<module>livelessons-integration-basic-messaging</module>
 		<module>livelessons-integration-eai</module>
 		<module>livelessons-integration-batch</module>
+
+		<!--
+			new in v2
+		-->
+		<module>livelessons-integration-dataflow-service</module>
+		<module>livelessons-integration-producer</module>
+		<module>livelessons-integration-consumer</module>
+		<module>livelessons-integration-and-batch</module>
 	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Camden.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dataflow-dependencies</artifactId>
+				<version>1.0.0.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+
+	</dependencyManagement>
 </project>
