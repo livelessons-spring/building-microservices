@@ -1,7 +1,5 @@
 package demo;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.security.KeyStore;
 
 import javax.net.ssl.SSLContext;
@@ -69,23 +67,18 @@ public class BasicHttpsSecurityApplicationTests {
 		ResponseEntity<String> httpsEntity = restTemplate
 				.getForEntity("https://localhost:" + this.port + "/hi", String.class);
 		assertThat(httpsEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, world");
+		assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, rod");
 	}
 
 	private SSLConnectionSocketFactory socketFactory() throws Exception {
 		char[] password = "password".toCharArray();
 		KeyStore truststore = KeyStore.getInstance("PKCS12");
-		truststore.load(getKeyStoreFile(), password);
+		truststore.load(new ClassPathResource("rod.p12").getInputStream(), password);
 		SSLContextBuilder builder = new SSLContextBuilder();
 		builder.loadKeyMaterial(truststore, password);
 		builder.loadTrustMaterial(truststore, new TrustSelfSignedStrategy());
 		return new SSLConnectionSocketFactory(builder.build(),
 				new NoopHostnameVerifier());
-	}
-
-	private InputStream getKeyStoreFile() throws IOException {
-		ClassPathResource resource = new ClassPathResource("rod.p12");
-		return resource.getInputStream();
 	}
 
 }
