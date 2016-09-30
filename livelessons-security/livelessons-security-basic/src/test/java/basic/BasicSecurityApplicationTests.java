@@ -30,7 +30,7 @@ public class BasicSecurityApplicationTests {
 				.basicAuthorization("pwebb", "boot").build();
 		ResponseEntity<String> response = restTemplate
 				.getForEntity("http://localhost:" + this.port + "/hi", String.class);
-		assertThat(response.getBody()).containsIgnoringCase("hello");
+		assertThat(response.getBody()).containsIgnoringCase("hello, pwebb");
 		System.out.println("received: " + response.getBody());
 	}
 
