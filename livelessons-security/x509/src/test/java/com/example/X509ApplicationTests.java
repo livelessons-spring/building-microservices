@@ -57,12 +57,15 @@ public class X509ApplicationTests {
 
     @Test
     public void testAuthenticatedHello() throws Exception {
+
         TestRestTemplate restTemplate = new TestRestTemplate();
         restTemplate.getRestTemplate()
                 .setRequestFactory(new HttpComponentsClientHttpRequestFactory(HttpClients
                         .custom().setSSLSocketFactory(socketFactory()).build()));
+
         ResponseEntity<String> httpsEntity = restTemplate
                 .getForEntity("https://localhost:" + this.port + "/hi", String.class);
+
         assertThat(httpsEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(httpsEntity.getBody()).containsIgnoringCase("hello, rod");
     }
