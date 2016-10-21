@@ -13,62 +13,61 @@
 </head>
 <body ng-app="app" ng-controller="home as home">
 
-    <div class="container" ng-show="!home.authenticated">
-        <a href="/login">Login </a>
-    </div>
+<div class="container" ng-show="!home.authenticated">
+    <a href="/login">Login </a>
+</div>
 
-    <div class="container" ng-show="home.authenticated">
-        Logged in as: <b><span ng-bind="home.user"></span></b> <br/>
-        Token: <b><span ng-bind="home.token"></span> </b><br/>
-        Greeting : <b><span ng-bind="home.greeting"></span></b>
-    </div>
+<div class="container" ng-show="home.authenticated">
+    Logged in as: <b><span ng-bind="home.user"></span></b> <br/>
+    Token: <b><span ng-bind="home.token"></span> </b><br/>
+    Greeting : <b><span ng-bind="home.greeting"></span></b>
+</div>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var app = angular.module("app", []);
+    var app = angular.module("app", []);
 
-        app.factory('oauth', function () {
-            return {details: null, name: null, token: null};
+    app.factory('oauth', function () {
+        return {details: null, name: null, token: null};
+    });
+
+
+    app.run(['$http', '$rootScope', 'oauth', function ($http, $rootScope, oauth) {
+
+        $http.get("/user").success(function (data) {
+
+            oauth.details = data.userAuthentication.details;
+            oauth.name = oauth.details.name;
+            oauth.token = data.details.tokenValue;
+
+            $http.defaults.headers.common['Authorization'] = 'bearer ' + oauth.token;
+
+            $rootScope.$broadcast('auth-event', oauth.token);
         });
+    }]);
 
+    app.controller("home", function ($http, $rootScope, oauth) {
 
-        app.run(['$http', '$rootScope', 'oauth', function ($http, $rootScope, oauth) {
+        var self = this;
 
-            $http.get("/user").success(function (data) {
+        self.authenticated = false;
 
-                oauth.details = data.userAuthentication.details;
-                oauth.name = oauth.details.name;
-                oauth.token = data.details.tokenValue;
+        $rootScope.$on('auth-event', function (evt, ctx) {
+            self.user = oauth.details.name;
+            self.token = oauth.token;
+            self.authenticated = true;
 
-                $http.defaults.headers.common['Authorization'] = 'bearer ' + oauth.token;
-
-                $rootScope.$broadcast('auth-event', oauth.token);
-            });
-        }]);
-
-        app.controller("home", function ($http, $rootScope, oauth) {
-
-            var self = this;
-
-            self.authenticated = false;
-
-            $rootScope.$on('auth-event', function (evt, ctx) {
-                self.user = oauth.details.name;
-                self.token = oauth.token;
-                self.authenticated = true;
-
-                $http.get('/hi')
-                        .success(function (greetingData) {
-                            self.greeting = greetingData.content;
-
-                        })
-                        .error(function (e) {
-                            console.log('oops!' + JSON.stringify(e));
-                        });
-            });
+            $http.get('/hi')
+                    .success(function (greetingData) {
+                        self.greeting = greetingData.content;
+                    })
+                    .error(function (e) {
+                        console.log('oops!' + JSON.stringify(e));
+                    });
         });
+    });
 
-    </script>
+</script>
 </body>
 </html>

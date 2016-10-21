@@ -23,12 +23,15 @@ import org.springframework.web.client.RestTemplate;
 import java.security.Principal;
 import java.util.Map;
 
+
+import static org.apache.commons.lang3.BooleanUtils.and;
+
 @SpringBootApplication
 public class EdgeServiceApplication {
 
     @Bean
-    OAuth2RestTemplate restTemplate(UserInfoRestTemplateFactory f) {
-        return f.getUserInfoRestTemplate();
+    OAuth2RestTemplate restTemplate(UserInfoRestTemplateFactory templateFactory) {
+        return templateFactory.getUserInfoRestTemplate();
     }
 
     public static void main(String[] args) {
@@ -36,32 +39,27 @@ public class EdgeServiceApplication {
     }
 }
 
-@RestController
-class GreetingsClientRestController {
 
-    private final RestTemplate restTemplate;
+@Configuration
+@EnableOAuth2Sso
+class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/hi")
-    Map<String, String> greet() {
-
-        ParameterizedTypeReference<Map<String, String>> typeReference =
-                new ParameterizedTypeReference<Map<String, String>>() {
-                };
-
-        return this.restTemplate.exchange("http://localhost:8080/hi",
-                HttpMethod.GET, null, typeReference).getBody();
-    }
-
-    @Autowired
-    public GreetingsClientRestController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.antMatcher("/**").authorizeRequests()
+                .antMatchers("/" , "/login**", "/webjars**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .logout().logoutSuccessUrl("/").permitAll()
+                .and()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 }
 
 @Configuration
-@EnableResourceServer
 @RestController
-class ResourceConfiguration extends ResourceServerConfigurerAdapter {
+@EnableResourceServer
+class PrincipalRestController extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -69,23 +67,27 @@ class ResourceConfiguration extends ResourceServerConfigurerAdapter {
     }
 
     @RequestMapping("/user")
-    public Principal user(Principal principal) {
-        return principal;
+    Principal principal(Principal p) {
+        return p;
     }
+
 }
 
+@RestController
+class GreetingsEdgeServiceRestController {
 
-@Configuration
-@EnableOAuth2Sso
-class SsoConfiguration extends WebSecurityConfigurerAdapter {
+    private final RestTemplate restTemplate;
 
+    @Autowired
+    public GreetingsEdgeServiceRestController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
-        http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**", "/webjars/**").permitAll().anyRequest()
-                .authenticated().and().logout().logoutSuccessUrl("/").permitAll().and().csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-        // @formatter:on
+    @RequestMapping(method = RequestMethod.GET, value = "/hi")
+    public Map<String, String> greet() {
+        return this.restTemplate.exchange("http://localhost:8080/hi",
+                HttpMethod.GET, null, new ParameterizedTypeReference<Map<String, String>>() {
+                })
+                .getBody();
     }
 }
