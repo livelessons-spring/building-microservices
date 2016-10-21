@@ -23,7 +23,6 @@ import org.springframework.web.client.RestTemplate;
 import java.security.Principal;
 import java.util.Map;
 
-@EnableResourceServer
 @SpringBootApplication
 public class EdgeServiceApplication {
 
