@@ -1,7 +1,7 @@
 :compat-mode:
 = Lesson 1: Bootstrapping (Spring Boot 101)
 
-_Take your first steps with Spring Boot._
+_Take your first steps with Spring Boot._ test codesee
 
 - link:livelessons-bootstrap-cli[Spring Boot CLI]
 - link:livelessons-bootstrap-maven[Using Maven]
