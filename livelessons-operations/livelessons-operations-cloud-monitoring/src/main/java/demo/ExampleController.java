@@ -12,18 +12,18 @@ public class ExampleController {
 		this.indicator = indicator;
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String hello() {
 		return "Hello World!";
 	}
 
-	@RequestMapping("/up")
+	@GetMapping("/up")
 	public String up() {
 		this.indicator.setUp(true);
 		return "now up";
 	}
 
-	@RequestMapping("/down")
+	@GetMapping("/down")
 	public String down() {
 		this.indicator.setUp(false);
 		return "now down";

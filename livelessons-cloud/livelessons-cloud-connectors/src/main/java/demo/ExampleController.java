@@ -17,13 +17,13 @@ public class ExampleController {
 		this.info = info;
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String hello() {
 		return this.jdbc.queryForObject("select model from car where id = 1",
 				String.class);
 	}
 
-	@RequestMapping("/cloudinfo")
+	@GetMapping("/cloudinfo")
 	public ApplicationInstanceInfo info() {
 		return this.info;
 	}

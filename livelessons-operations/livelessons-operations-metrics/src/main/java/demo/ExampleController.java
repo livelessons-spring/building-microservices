@@ -12,7 +12,7 @@ public class ExampleController {
 		this.service = service;
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String hello() {
 		this.service.call();
 		return "Hello World!";

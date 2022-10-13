@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingsRestController {
 
-	@RequestMapping("/hi")
+	@PostMapping("/hi")
 	public Map<String, Object> hi(Principal principal) {
 		Map<String, Object> result = new HashMap<>();
 		result.put("id", UUID.randomUUID().toString());

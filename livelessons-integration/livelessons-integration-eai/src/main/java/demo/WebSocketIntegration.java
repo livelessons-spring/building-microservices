@@ -69,7 +69,7 @@ public class WebSocketIntegration {
 		};
 	}
 
-	@RequestMapping("/echo")
+	@GetMapping("/echo")
 	public void send(@RequestParam String name) {
 		requestChannel().send(MessageBuilder.withPayload(name).build());
 	}
