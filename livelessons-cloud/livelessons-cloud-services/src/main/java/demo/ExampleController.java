@@ -13,7 +13,7 @@ public class ExampleController {
 		this.jdbc = jdbc;
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String hello() {
 		return jdbc.queryForObject("select model from car where id = 1", String.class);
 	}
